@@ -8,6 +8,19 @@ package threadsgara;
  *
  * @author ranasgalla.niccolo
  */
-public class TipiCavalli {
-    
+public enum TipiCavalli {
+    FULMINE("Fulmine"),
+    VENTO("Vento"),
+    TEMPESTA("Tempesta"),
+    SAETTA("Saetta");
+
+    private final String nome;
+
+    TipiCavalli(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
 }

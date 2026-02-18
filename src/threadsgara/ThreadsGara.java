@@ -15,6 +15,8 @@ public class ThreadsGara {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        GaraGrafica g = new GaraGrafica();
+        g.setVisible(true);
     }
     
 }
