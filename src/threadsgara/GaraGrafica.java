@@ -17,6 +17,10 @@ public class GaraGrafica extends javax.swing.JFrame {
      */
     public GaraGrafica() {
         initComponents();
+        pb1.setUI(new ProgressBarGUI());
+        pb2.setUI(new ProgressBarGUI());
+        pb3.setUI(new ProgressBarGUI());
+        pb4.setUI(new ProgressBarGUI());
     }
 
     /**
