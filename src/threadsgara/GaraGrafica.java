@@ -32,14 +32,16 @@ public class GaraGrafica extends javax.swing.JFrame {
         pb3 = new javax.swing.JProgressBar();
         pb4 = new javax.swing.JProgressBar();
         pb2 = new javax.swing.JProgressBar();
-        btnReset = new javax.swing.JButton();
         btnAvvia = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         taRisultato = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gara");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
 
-        btnReset.setText("Reset");
+        pb1.setName(""); // NOI18N
 
         btnAvvia.setText("Avvia");
         btnAvvia.addActionListener(new java.awt.event.ActionListener() {
@@ -60,23 +62,22 @@ public class GaraGrafica extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pb3, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnAvvia)
-                            .addGap(305, 305, 305)
-                            .addComponent(btnReset))
-                        .addComponent(pb4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pb4, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pb2, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pb1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(10, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAvvia)
+                .addGap(85, 85, 85))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pb1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
@@ -85,12 +86,10 @@ public class GaraGrafica extends javax.swing.JFrame {
                         .addComponent(pb3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addComponent(pb4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAvvia)
-                    .addComponent(btnReset))
-                .addContainerGap(188, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAvvia)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -98,6 +97,18 @@ public class GaraGrafica extends javax.swing.JFrame {
 
     private void btnAvviaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvviaActionPerformed
         // TODO add your handling code here:
+        taRisultato.setText(""); // pulisce la textarea prima di iniziare
+        Cavallo.resetPosizione();
+
+        Thread t1 = new Thread(new Cavallo(pb1, taRisultato, "Fulmine"));
+        Thread t2 = new Thread(new Cavallo(pb2, taRisultato, "Vento"));
+        Thread t3 = new Thread(new Cavallo(pb3, taRisultato, "Tempesta"));
+        Thread t4 = new Thread(new Cavallo(pb4, taRisultato, "Saetta"));
+
+        t1.start();
+        t2.start();
+        t3.start();
+        t4.start();
     }//GEN-LAST:event_btnAvviaActionPerformed
 
     /**
@@ -127,7 +138,6 @@ public class GaraGrafica extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvvia;
-    private javax.swing.JButton btnReset;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JProgressBar pb1;
     private javax.swing.JProgressBar pb2;
