@@ -101,7 +101,7 @@ public class GaraGrafica extends javax.swing.JFrame {
 
     private void btnAvviaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvviaActionPerformed
         // TODO add your handling code here:
-        taRisultato.setText(""); // pulisce la textarea prima di iniziare
+        taRisultato.setText(""); 
         Cavallo.resetPosizione();
 
         Thread t1 = new Thread(new Cavallo(pb1, taRisultato, TipiCavalli.GOLD_SHIP.getNome()));
