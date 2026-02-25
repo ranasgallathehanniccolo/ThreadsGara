@@ -54,6 +54,7 @@ public class GaraGrafica extends javax.swing.JFrame {
             }
         });
 
+        taRisultato.setEditable(false);
         taRisultato.setColumns(20);
         taRisultato.setRows(5);
         jScrollPane1.setViewportView(taRisultato);
