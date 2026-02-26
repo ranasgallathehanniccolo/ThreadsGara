@@ -4,15 +4,11 @@
  */
 package threadsgara;
 import java.util.*;
-import javax.swing.JProgressBar;
 /**
  *
  * @author ranasgalla.niccolo
  */
-public class Abilita {
-    public static ArrayList <Cavallo> posizioneAttuale;
-
-    public void Oguri(JProgressBar pb){
-        if(pb.getValue() > )
-    }
+public interface Abilita {
+    // Ritorna true se l'abilità si è attivata (così non si riattiva)
+    boolean attiva(Cavallo seSstesso, List<Cavallo> tuttiCavalli, int posizioneAttuale);
 }
