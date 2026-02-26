@@ -4,10 +4,15 @@
  */
 package threadsgara;
 import java.util.*;
+import javax.swing.JProgressBar;
 /**
  *
  * @author ranasgalla.niccolo
  */
 public class Abilita {
-    public static <ArrayList> Cavallo posizioniAttuali
+    public static ArrayList <Cavallo> posizioneAttuale;
+
+    public void Oguri(JProgressBar pb){
+        if(pb.getValue() > )
+    }
 }
