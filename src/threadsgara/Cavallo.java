@@ -7,7 +7,10 @@ package threadsgara;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 import java.util.*;
-
+/**
+ *
+ * @author ranasgalla.niccolo
+ */
 public class Cavallo implements Runnable {
 
     private JProgressBar pb;
@@ -38,7 +41,12 @@ public class Cavallo implements Runnable {
     public synchronized int getPosizione() { return posizione; }
     public String getNome() { return nome; }
 
-    public synchronized void setBloccato(boolean b) { bloccato = b; }
+    public synchronized void setBloccato(boolean b) {
+        bloccato = b;
+        if (!b) {
+            notifyAll(); // sveglia il thread che era in wait
+        }
+    }
     public synchronized void setSleep(int ms) { sleepOverride = ms; }
 
     @Override
@@ -50,7 +58,12 @@ public class Cavallo implements Runnable {
             // Aspetta se bloccata
             synchronized (this) {
                 while (bloccato) {
-                    try { wait(); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        return;
+                    }
                 }
                 posizione = i;
             }

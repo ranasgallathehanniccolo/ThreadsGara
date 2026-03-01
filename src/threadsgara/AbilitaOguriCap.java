@@ -11,11 +11,11 @@ import java.util.List;
 public class AbilitaOguriCap implements Abilita {
 
     @Override
-    public boolean attiva(Cavallo seSstesso, List<Cavallo> tuttiCavalli, int posizioneAttuale) {
+    public boolean attiva(Cavallo seStesso, List<Cavallo> tuttiCavalli, int posizioneAttuale) {
         // Trova cavalli davanti
         Cavallo primodavanti = null;
         for (Cavallo c : tuttiCavalli) {
-            if (c != seSstesso && c.getPosizione() > posizioneAttuale) {
+            if (c != seStesso && c.getPosizione() > posizioneAttuale) {
                 if (primodavanti == null || c.getPosizione() < primodavanti.getPosizione()) {
                     primodavanti = c;
                 }
@@ -32,7 +32,7 @@ public class AbilitaOguriCap implements Abilita {
             }).start();
 
             // Boost a se stessa
-            seSstesso.setSleep(5);
+            seStesso.setSleep(5);
             return true; // abilità usata
         }
         return false;

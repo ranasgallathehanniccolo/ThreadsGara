@@ -10,5 +10,5 @@ import java.util.*;
  */
 public interface Abilita {
     // Ritorna true se l'abilità si è attivata (così non si riattiva)
-    boolean attiva(Cavallo seSstesso, List<Cavallo> tuttiCavalli, int posizioneAttuale);
+    boolean attiva(Cavallo seStesso, List<Cavallo> tuttiCavalli, int posizioneAttuale);
 }

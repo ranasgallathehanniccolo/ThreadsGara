@@ -115,10 +115,10 @@ public class GaraGrafica extends javax.swing.JFrame {
         taRisultato.setText(""); 
         Cavallo.resetPosizione();
 
-        Thread t1 = new Thread(new Cavallo(pb1, taRisultato, TipiCavalli.GOLD_SHIP.getNome()));
-        Thread t2 = new Thread(new Cavallo(pb2, taRisultato, TipiCavalli.MEJIRO_MCQUEEN.getNome()));
-        Thread t3 = new Thread(new Cavallo(pb3, taRisultato, TipiCavalli.OGURI_CAP.getNome()));
-        Thread t4 = new Thread(new Cavallo(pb4, taRisultato, TipiCavalli.RICE_SHOWER.getNome()));
+        Thread t1 = new Thread(new Cavallo(pb1, taRisultato, TipiCavalli.GOLD_SHIP.getNome(), new AbilitaGoldShip()));
+        Thread t2 = new Thread(new Cavallo(pb2, taRisultato, TipiCavalli.MEJIRO_MCQUEEN.getNome(), new AbilitaMejiroMcQueen()));
+        Thread t3 = new Thread(new Cavallo(pb3, taRisultato, TipiCavalli.OGURI_CAP.getNome(), new AbilitaOguriCap()));
+        Thread t4 = new Thread(new Cavallo(pb4, taRisultato, TipiCavalli.RICE_SHOWER.getNome(), new AbilitaRiceShower()));
 
         t1.start();
         t2.start();
