@@ -53,7 +53,6 @@ public class Cavallo implements Runnable {
 
         while (i <= 100) {
 
-            // Controlla se bloccato FUORI dal synchronized
             boolean erabloccato;
             synchronized (this) {
                 erabloccato = bloccato;
@@ -61,7 +60,7 @@ public class Cavallo implements Runnable {
 
             if (erabloccato) {
                 try {
-                    Thread.sleep(100); // sleep FUORI dal synchronized!
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
