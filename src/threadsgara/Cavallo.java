@@ -43,53 +43,56 @@ public class Cavallo implements Runnable {
 
     public synchronized void setBloccato(boolean b) {
         bloccato = b;
-        if (!b) {
-            notifyAll(); // sveglia il thread che era in wait
-        }
     }
     public synchronized void setSleep(int ms) { sleepOverride = ms; }
 
     @Override
     public void run() {
         boolean abilitaUsata = false;
+        int i = 0;
 
-        for (int i = 0; i <= 100; i++) {
+        while (i <= 100) {
 
-            // Aspetta se bloccata
+            // Controlla se bloccato FUORI dal synchronized
+            boolean erabloccato;
             synchronized (this) {
-                while (bloccato) {
-                    try {
-                        wait();
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                        return;
-                    }
+                erabloccato = bloccato;
+            }
+
+            if (erabloccato) {
+                try {
+                    Thread.sleep(100); // sleep FUORI dal synchronized!
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
                 }
+                continue;
+            }
+
+            synchronized (this) {
                 posizione = i;
             }
 
             final int pos = i;
             SwingUtilities.invokeLater(() -> pb.setValue(pos));
 
-            // Controlla abilità
             if (!abilitaUsata && abilita != null) {
                 abilitaUsata = abilita.attiva(this, tuttiCavalli, posizione);
             }
 
-            // Sleep con eventuale boost
             try {
                 int sleepAttuale;
                 synchronized (this) {
-                    sleepAttuale = (sleepOverride != -1) ? sleepOverride : (int)(Math.random() * 100) + 20;
+                    sleepAttuale = (sleepOverride != -1) ? sleepOverride : (int) (Math.random() * 100) + 20;
                     sleepOverride = -1;
                 }
                 Thread.sleep(sleepAttuale);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
+
+            i++;
         }
 
-        // Posizione di arrivo
         synchronized (Cavallo.class) {
             posizioneArrivo++;
             final int arr = posizioneArrivo;
