@@ -56,7 +56,7 @@ public class GaraGrafica extends javax.swing.JFrame {
         pb4.setBackground(new java.awt.Color(255, 204, 0));
         pb4.setForeground(new java.awt.Color(255, 255, 102));
 
-        pb2.setBackground(new java.awt.Color(102, 153, 255));
+        pb2.setBackground(new java.awt.Color(0, 153, 255));
         pb2.setForeground(new java.awt.Color(102, 204, 255));
 
         btnAvvia.setBackground(new java.awt.Color(0, 153, 51));
