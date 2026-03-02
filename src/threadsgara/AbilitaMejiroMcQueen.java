@@ -9,7 +9,8 @@ import java.util.List;
  * @author Windows
  */
 public class AbilitaMejiroMcQueen implements Abilita {
-
+    //attiva l'abilità quando si trova a metà gara, controlla che c'è qualcuno nelle 10 posizioni vicino a lei
+    //e in caso ci fossero lo bloccca per 200 ms, e ottiene un boost di velocita
     @Override
     public boolean attiva(Cavallo seStesso, List<Cavallo> tuttiCavalli, int posizioneAttuale) {
         if (posizioneAttuale < 50) return false;

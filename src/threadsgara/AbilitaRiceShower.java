@@ -9,7 +9,7 @@ import java.util.List;
  * @author Windows
  */
 public class AbilitaRiceShower implements Abilita {
-
+    //quando attiva la abilita, solo se è al 85% della gara si da un boost di velocita
     @Override
     public boolean attiva(Cavallo seStesso, List<Cavallo> tuttiCavalli, int posizioneAttuale) {
         if (posizioneAttuale >= 85) {

@@ -17,14 +17,14 @@ public class Cavallo implements Runnable {
     private javax.swing.JTextArea ta;
     private String nome;
     private Abilita abilita;
-
+    
     private int posizione = 0;
     private boolean bloccato = false;
     private int sleepOverride = -1;
 
     private static int posizioneArrivo = 0;
     private static final List<Cavallo> tuttiCavalli = Collections.synchronizedList(new ArrayList<>());
-
+    //Costruttore dove chiede la progressbar, la textArea, nome e l'abilita
     public Cavallo(JProgressBar pb, javax.swing.JTextArea ta, String nome, Abilita abilita) {
         this.pb = pb;
         this.ta = ta;
@@ -32,27 +32,28 @@ public class Cavallo implements Runnable {
         this.abilita = abilita;
         tuttiCavalli.add(this);
     }
-
+    //resetta la posizione
     public static void resetPosizione() {
         posizioneArrivo = 0;
         tuttiCavalli.clear();
     }
-
+    //prende la posizione attuale
     public synchronized int getPosizione() { return posizione; }
     public String getNome() { return nome; }
-
+    //boolean per capire se è bloccato o no il cavallo
     public synchronized void setBloccato(boolean b) {
         bloccato = b;
     }
+    //Boost di velocita
     public synchronized void setSleep(int ms) { sleepOverride = ms; }
 
     @Override
     public void run() {
         boolean abilitaUsata = false;
         int i = 0;
-
+        //Qui i thread partono
         while (i <= 100) {
-
+            
             boolean erabloccato;
             synchronized (this) {
                 erabloccato = bloccato;
@@ -73,7 +74,7 @@ public class Cavallo implements Runnable {
 
             final int pos = i;
             SwingUtilities.invokeLater(() -> pb.setValue(pos));
-
+            //controllo per vedere se ha attivato l'abilita
             if (!abilitaUsata && abilita != null) {
                 abilitaUsata = abilita.attiva(this, tuttiCavalli, posizione);
             }
@@ -91,7 +92,7 @@ public class Cavallo implements Runnable {
 
             i++;
         }
-
+        //Serve per mettere la posizione del cavallo appena finiscono
         synchronized (Cavallo.class) {
             posizioneArrivo++;
             final int arr = posizioneArrivo;

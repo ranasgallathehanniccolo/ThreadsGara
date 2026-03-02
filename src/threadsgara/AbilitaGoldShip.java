@@ -10,7 +10,8 @@ import java.util.List;
  * @author ranasgalla.niccolo
  */
 public class AbilitaGoldShip implements Abilita {
-
+    //può attivare l'abilita solo a metà gara e vede quanti cavalli ci sono davanti a se e nel caso fossero
+    //2 o più davanti a se si da un boost di velocita
     @Override
     public boolean attiva(Cavallo seStesso, List<Cavallo> tuttiCavalli, int posizioneAttuale) {
         if (posizioneAttuale < 50) return false;

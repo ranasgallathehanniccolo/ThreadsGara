@@ -11,14 +11,14 @@ import java.awt.*;
  * @author ranasgalla.niccolo
  */
 public class ProgressBarGUI extends BasicProgressBarUI {
-
+    //come variabile dell'immagine ha gif
     private Image gif;
-
+    //inserisce l'immagine nel riquadro della progressBara
     public ProgressBarGUI(TipiCavalli tipo) {
         ImageIcon icon = new ImageIcon(getClass().getResource(tipo.getPathGif()));
         gif = icon.getImage();
     }
-
+    //Sistema la grandezza delle immagini
     @Override
     public void paintDeterminate(Graphics g, JComponent c) {
         super.paintDeterminate(g, c);

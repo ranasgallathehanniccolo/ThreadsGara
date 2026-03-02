@@ -9,6 +9,7 @@ package threadsgara;
  * @author ranasgalla.niccolo
  */
 public enum TipiCavalli {
+    //I 4 tipi di cavalli
     OGURI_CAP("Oguri Cap", "/threadsgara/gifs/oguricap.gif"),
     RICE_SHOWER("Rice Shower", "/threadsgara/gifs/riceshower.gif"),
     GOLD_SHIP("Gold Ship", "/threadsgara/gifs/goldship.gif"),

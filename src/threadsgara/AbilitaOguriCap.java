@@ -9,7 +9,8 @@ import java.util.List;
  * @author ranasgalla.niccolo
  */
 public class AbilitaOguriCap implements Abilita {
-
+    //attiva l'abilita quando gli pare e vede se c'è qualcuno davanti a se, quello più vicino
+    //si bloccherà per 2000 ms e poi si da un boost
     @Override
     public boolean attiva(Cavallo seStesso, List<Cavallo> tuttiCavalli, int posizioneAttuale) {
         Cavallo primodavanti = null;

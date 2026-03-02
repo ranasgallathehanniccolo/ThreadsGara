@@ -17,6 +17,7 @@ public class GaraGrafica extends javax.swing.JFrame {
      */
     public GaraGrafica() {
         initComponents();
+        //Sulle progressBar mette l'immagine del cavallo scelto
         pb1.setUI(new ProgressBarGUI(TipiCavalli.MEJIRO_MCQUEEN));
         pb2.setUI(new ProgressBarGUI(TipiCavalli.OGURI_CAP));
         pb3.setUI(new ProgressBarGUI(TipiCavalli.RICE_SHOWER));
@@ -46,13 +47,17 @@ public class GaraGrafica extends javax.swing.JFrame {
         setResizable(false);
 
         pb1.setBackground(new java.awt.Color(153, 102, 255));
+        pb1.setForeground(new java.awt.Color(204, 204, 255));
         pb1.setName(""); // NOI18N
 
-        pb3.setBackground(new java.awt.Color(51, 0, 102));
+        pb3.setBackground(new java.awt.Color(102, 0, 255));
+        pb3.setForeground(new java.awt.Color(204, 102, 255));
 
         pb4.setBackground(new java.awt.Color(255, 204, 0));
+        pb4.setForeground(new java.awt.Color(255, 255, 102));
 
         pb2.setBackground(new java.awt.Color(102, 153, 255));
+        pb2.setForeground(new java.awt.Color(102, 204, 255));
 
         btnAvvia.setBackground(new java.awt.Color(0, 153, 51));
         btnAvvia.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -112,14 +117,16 @@ public class GaraGrafica extends javax.swing.JFrame {
 
     private void btnAvviaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvviaActionPerformed
         // TODO add your handling code here:
-        taRisultato.setText(""); 
+        //Pulisce la textArea
+        taRisultato.setText("");
+        //Resetta le posizione dei cavalli a 0
         Cavallo.resetPosizione();
-
+        //Crea i 4 thread nuovi con la sua progress bar, la textArea, il tipo di cavallo e l'abilita di quel cavallo
         Thread t1 = new Thread(new Cavallo(pb1, taRisultato, TipiCavalli.GOLD_SHIP.getNome(), new AbilitaGoldShip()));
         Thread t2 = new Thread(new Cavallo(pb2, taRisultato, TipiCavalli.MEJIRO_MCQUEEN.getNome(), new AbilitaMejiroMcQueen()));
         Thread t3 = new Thread(new Cavallo(pb3, taRisultato, TipiCavalli.OGURI_CAP.getNome(), new AbilitaOguriCap()));
         Thread t4 = new Thread(new Cavallo(pb4, taRisultato, TipiCavalli.RICE_SHOWER.getNome(), new AbilitaRiceShower()));
-
+        //Starta i thread
         t1.start();
         t2.start();
         t3.start();

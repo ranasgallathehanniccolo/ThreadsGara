@@ -9,6 +9,6 @@ import java.util.*;
  * @author ranasgalla.niccolo
  */
 public interface Abilita {
-    // Ritorna true se l'abilità si è attivata (così non si riattiva)
+    //Boolena che permette di attivare l'attivita una singola volta a partita
     boolean attiva(Cavallo seStesso, List<Cavallo> tuttiCavalli, int posizioneAttuale);
 }
