@@ -10,23 +10,29 @@ import java.util.List;
  */
 public class AbilitaMejiroMcQueen implements Abilita {
     //attiva l'abilità quando si trova a metà gara, controlla che c'è qualcuno nelle 10 posizioni vicino a lei
-    //e in caso ci fossero lo bloccca per 200 ms, e ottiene un boost di velocita
+    //e in caso ci fossero lo bloccca per 200 ms
     @Override
     public boolean attiva(Cavallo seStesso, List<Cavallo> tuttiCavalli, int posizioneAttuale) {
-        if (posizioneAttuale < 50) return false;
+        if (posizioneAttuale < 50) {
+            return false;
+        }
 
         boolean qualcunoVicino = false;
         for (Cavallo c : tuttiCavalli) {
             if (c != seStesso && Math.abs(c.getPosizione() - posizioneAttuale) <= 10) {
-                c.setSleep(200);
+                final Cavallo target = c;
+                new Thread(() -> {
+                    target.setBloccato(true);
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                    target.setBloccato(false);
+                }).start();
                 qualcunoVicino = true;
             }
         }
-
-        if (qualcunoVicino) {
-            seStesso.setSleep(80);
-            return true;
-        }
-        return false;
+        return qualcunoVicino;
     }
 }

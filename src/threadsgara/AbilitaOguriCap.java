@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class AbilitaOguriCap implements Abilita {
     //attiva l'abilita quando gli pare e vede se c'è qualcuno davanti a se, quello più vicino
-    //si bloccherà per 2000 ms e poi si da un boost
+    //si bloccherà per 300 ms e poi si da un boost
     @Override
     public boolean attiva(Cavallo seStesso, List<Cavallo> tuttiCavalli, int posizioneAttuale) {
         Cavallo primodavanti = null;
@@ -21,17 +21,19 @@ public class AbilitaOguriCap implements Abilita {
                 }
             }
         }
-
         if (primodavanti != null && Math.random() < 0.6) {
             final Cavallo target = primodavanti;
             new Thread(() -> {
                 target.setBloccato(true);
-                try { Thread.sleep(2000); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
                 target.setBloccato(false);
             }).start();
-
             seStesso.setSleep(5);
-            return true; // abilità usata
+            return true;
         }
         return false;
     }
