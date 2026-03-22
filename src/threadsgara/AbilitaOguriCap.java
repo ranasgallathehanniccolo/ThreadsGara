@@ -3,12 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package threadsgara;
+
 import java.util.List;
+
 /**
  *
  * @author ranasgalla.niccolo
  */
 public class AbilitaOguriCap implements Abilita {
+
     //attiva l'abilita quando gli pare e vede se c'è qualcuno davanti a se, quello più vicino
     //si bloccherà per 300 ms e poi si da un boost
     @Override
@@ -22,16 +25,7 @@ public class AbilitaOguriCap implements Abilita {
             }
         }
         if (primodavanti != null && Math.random() < 0.6) {
-            final Cavallo target = primodavanti;
-            new Thread(() -> {
-                target.setBloccato(true);
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-                target.setBloccato(false);
-            }).start();
+            primodavanti.setRallentamento(400, 4);
             seStesso.setSleep(5);
             return true;
         }

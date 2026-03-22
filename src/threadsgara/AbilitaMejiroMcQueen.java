@@ -20,16 +20,7 @@ public class AbilitaMejiroMcQueen implements Abilita {
         boolean qualcunoVicino = false;
         for (Cavallo c : tuttiCavalli) {
             if (c != seStesso && Math.abs(c.getPosizione() - posizioneAttuale) <= 10) {
-                final Cavallo target = c;
-                new Thread(() -> {
-                    target.setBloccato(true);
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                    }
-                    target.setBloccato(false);
-                }).start();
+                c.setRallentamento(300, 3); // 300ms per 3 step
                 qualcunoVicino = true;
             }
         }

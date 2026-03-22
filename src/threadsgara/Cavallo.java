@@ -21,6 +21,8 @@ public class Cavallo implements Runnable {
     private int posizione = 0;
     private boolean bloccato = false;
     private int sleepOverride = -1;
+    private int stepsRallentati = 0;
+    private int valoreRallentamento = 0;
 
     private static int posizioneArrivo = 0;
     private static final List<Cavallo> tuttiCavalli = Collections.synchronizedList(new ArrayList<>());
@@ -46,6 +48,11 @@ public class Cavallo implements Runnable {
     }
     //Boost di velocita
     public synchronized void setSleep(int ms) { sleepOverride = ms; }
+    
+    public synchronized void setRallentamento(int ms, int steps) {
+        valoreRallentamento = ms;
+        stepsRallentati = steps;
+    }
 
     @Override
     public void run() {
@@ -82,8 +89,13 @@ public class Cavallo implements Runnable {
             try {
                 int sleepAttuale;
                 synchronized (this) {
-                    sleepAttuale = (sleepOverride != -1) ? sleepOverride : (int) (Math.random() * 100) + 20;
-                    sleepOverride = -1;
+                    if (stepsRallentati > 0) {
+                        sleepAttuale = valoreRallentamento;
+                        stepsRallentati--;
+                    } else {
+                        sleepAttuale = (sleepOverride != -1) ? sleepOverride : (int) (Math.random() * 100) + 20;
+                        sleepOverride = -1;
+                    }
                 }
                 Thread.sleep(sleepAttuale);
             } catch (InterruptedException e) {
